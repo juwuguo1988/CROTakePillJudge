@@ -280,7 +280,7 @@ public abstract class CameraActivity extends AppCompatActivity
             if(processImage(2) == 1){
                 count_neg ++;
             };//,本次服药已完成，请遵医嘱坚持正确服药。祝您健康！
-            if(count_neg > 15){
+            if(count_neg > 60){
                 tv_display_content.setText("本次服药已完成\n请遵医嘱坚持正确服药\n祝您健康！");
             }
             LOGGER.d("onPreviewFrame " + "=======检测完毕=========");
