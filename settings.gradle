@@ -1,0 +1,3 @@
+include ':app' ,':tensorflow-lite'
+include ':faceplatform-ui'
+include ':faceplatform'

@@ -1,0 +1,59 @@
+// 在app下的 build.gradle 引用插件
+apply plugin: 'com.android.application'
+apply plugin: 'de.undercouch.download'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+    defaultConfig {
+        applicationId "org.tensorflow.lite.examples.detection"// 应用id 唯一标识，至少有一个. 字母开头字母数字下划线 一旦定义不能随意改变
+        minSdkVersion 21
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    aaptOptions {// 全称 Android Asset Packaging Tool
+        noCompress "tflite"//不压缩
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+// import DownloadModels task
+project.ext.ASSET_DIR = projectDir.toString() + '/src/main/assets'// 指定 asset 路径
+project.ext.TMP_DIR   = project.buildDir.toString() + '/downloads'// 指定临时路径
+
+// Download default models; if you wish to use your own models then
+// place them in the "assets" directory and comment out this line.
+// apply from: "download_model.gradle"
+// 如果要换成自己的模型，改这里。请注意要转成.tflite文件
+// 那么去哪里转这个文件呢，难道下载下来就是.tflite吗?
+// 是的，zip解压之后就是直接的 detect.tflite 和 labelmap.txt
+// 可是这个 tflite 转之前怎么来的呢
+// 如果我换了我自己的模型 是不是捕获图像以后要做些别的什么处理（根据模型的不同）
+
+//apply from:'download_model.gradle'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation('org.tensorflow:tensorflow-lite:0.0.0-nightly') { changing = true }
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.google.truth:truth:1.0.1'
+    api 'cn.bingoogolapple:bga-qrcode-zxing:1.2.1'
+    implementation project(path: ':faceplatform-ui')
+}

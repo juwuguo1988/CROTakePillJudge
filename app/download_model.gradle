@@ -1,0 +1,26 @@
+// 所有的构建工作都由 task 来完成，比如编译打包发布等。
+task downloadZipFile(type: Download) {
+    src 'http://storage.googleapis.com/download.tensorflow.org/models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip'
+    dest new File(buildDir, 'zips/')
+    overwrite false // src 和 dest 关键字
+}
+
+
+task downloadAndUnzipFile(dependsOn: downloadZipFile, type: Copy) {
+    from zipTree(downloadZipFile.dest) // from 和 into 就是关键字 这么粗暴
+    into project.ext.ASSET_DIR
+}
+
+
+task extractModels(type: Copy) {
+    dependsOn downloadAndUnzipFile
+}
+
+tasks.whenTaskAdded { task -> // 这个是“主函数”吧
+    if (task.name == 'assembleDebug') {
+        task.dependsOn 'extractModels'
+    }
+    if (task.name == 'assembleRelease') {
+        task.dependsOn 'extractModels'
+    }
+}

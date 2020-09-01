@@ -1,0 +1,35 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.tensorflow.lite.examples.detection">
+
+    <uses-sdk />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@drawable/icon_app_launcher"
+        android:label="心之力服药助手"
+        android:roundIcon="@drawable/icon_app_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.ObjectDetection">
+
+        <activity
+            android:name=".activity.FaceCheckActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.FaceLivenessExpActivity"/>
+        <activity android:name=".activity.FaceDetectExpActivity"/>
+        <activity android:name=".DetectorActivity"/>
+    </application>
+</manifest>

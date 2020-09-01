@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_ffffff">
+
+    <TextView
+        android:id="@+id/main_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="15dp"
+        android:text="设置"
+        android:textColor="#ffffff"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/main_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="40dp"
+        android:text="心之力服药助手"
+        android:textColor="@color/c_3592de"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/main_title_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:background="#0000"
+        android:gravity="center"
+        android:text="人脸识别验证身份信息"
+        android:textColor="#2c2f32"
+        android:textSize="18sp" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main_title_1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#0000"
+            android:gravity="center"
+            android:text="请确保为 "
+            android:textColor="#2c2f32"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="#0000"
+            android:text="韩梅梅"
+            android:textColor="#2c2f32"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 本人操作"
+            android:textColor="#2c2f32"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/main_title"
+        android:paddingTop="5dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_select_next"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/selector_btn_blue_common"
+        android:text="确定"
+        android:textColor="@color/c_ffffff"
+        android:textSize="16sp" />
+
+</RelativeLayout>
