@@ -207,7 +207,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 //    canvasPH.drawBitmap(submaprgbFrameBitmap, frameToCropTransformPH, null);
 //    // For examining the actual TF input.
         if (SAVE_PREVIEW_BITMAP && detectedface > facethreshold) {
-//      ImageUtils.saveBitmap(pillHandBitmap);
+            ImageUtils.saveBitmap(pillHandBitmap);
             int a = 0;
         }
         if (detectedface > facethreshold - 1) {
@@ -289,10 +289,14 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                     System.out.println("********########" + mouth_pill_result + "********########" + location_mouth_pill + "********########" + mouth_pill_result.getConfidence() + "********########" + mouth_pill_result);
                                     if (location_mouth_pill != null && mouth_pill_result.getConfidence() >= minimumConfidence && mouth_pill_result.getTitle().equals("tablet")) {
 //                    System.out.println("********########" + pillMouthBitmap.getWidth());
-                                        mouth_pill_result.setLocation(location_mouth_pill);
-                                        mappedRecognitions_mouthpill.add(mouth_pill_result);
-                                        if (obj_to_detect == 2) {
-                                            detectedpillmouth = 0;
+                                        float pill_width = Math.abs(mouth_pill_result.getLocation().right - mouth_pill_result.getLocation().left);
+                                        float pill_height = Math.abs(mouth_pill_result.getLocation().bottom - mouth_pill_result.getLocation().top);
+                                        if (pill_width <= 150 && pill_height <= 150){
+                                            mouth_pill_result.setLocation(location_mouth_pill);
+                                            mappedRecognitions_mouthpill.add(mouth_pill_result);
+                                            if (obj_to_detect == 2) {
+                                                detectedpillmouth = 0;
+                                            }
                                         }
                                     }
                                 }
@@ -312,13 +316,16 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                             final List<Classifier.Recognition> resultsPH = detector.recognizeImage(pillHandBitmap);
                             for (final Classifier.Recognition resultPH : resultsPH) {
                                 RectF locationPH = resultPH.getLocation();
-//                String label = resultPH.getTitle();
                                 if (locationPH != null && resultPH.getConfidence() >= minimumConfidence && resultPH.getTitle().equals("tablet")) {
-//                  System.out.println("********########" + locationPH);
-                                    resultPH.setLocation(locationPH);
-                                    mappedRecognitions_handpill.add(resultPH);
-                                    if (obj_to_detect == 1) {
-                                        detectedpillhand = 0;
+                                    float pill_width = Math.abs(resultPH.getLocation().right - resultPH.getLocation().left);
+                                    float pill_height = Math.abs(resultPH.getLocation().bottom - resultPH.getLocation().top);
+                                    System.out.println("********########" + pill_width + ",        " + pill_height);
+                                    if (pill_width <= 150 && pill_height <= 150){
+                                        resultPH.setLocation(locationPH);
+                                        mappedRecognitions_handpill.add(resultPH);
+                                        if (obj_to_detect == 1) {
+                                            detectedpillhand = 0;
+                                        }
                                     }
                                 }
                             }
@@ -365,7 +372,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         Matrix matrixPH = new Matrix();
         matrixPH.preScale(300f / mouth_width, 300f / mouth_height);
         pillfaceBitmap = Bitmap.createBitmap(pillfaceBitmap, 0, 0, mouth_width, mouth_height, matrixPH, false);
-        ImageUtils.saveBitmap(pillfaceBitmap);
+//        ImageUtils.saveBitmap(pillfaceBitmap);
 //    System.out.println("********" + pillMouthBitmap.getHeight() + "********" + pillMouthBitmap.getWidth());
 //    screen_pos = new RectF(x, 480f - y - height, x + width, 480f - y);
     }

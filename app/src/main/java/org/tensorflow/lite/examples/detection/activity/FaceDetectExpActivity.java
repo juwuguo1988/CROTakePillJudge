@@ -52,7 +52,7 @@ public class FaceDetectExpActivity extends FaceDetectActivity {
                                 }
                             });
             mDefaultDialog = builder.create();
-            mDefaultDialog.setCancelable(false);
+            mDefaultDialog.setCancelable(true);
         }
         mDefaultDialog.dismiss();
         mDefaultDialog.show();
